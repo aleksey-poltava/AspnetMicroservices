@@ -13,10 +13,10 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://localhost:17460/swagger",
+      "applicationUrl": "http://localhost:17460",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:17460"
+      }
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -30,7 +30,7 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "publishAllPorts": true
+      "environmentVariables": {}
     }
   }
 }
