@@ -1,0 +1,1 @@
+﻿https://github.com/mehmetozkaya/AspnetMicroservices/blob/main/src/Services/Discount/Discount.API/Entities/Coupon.cs
