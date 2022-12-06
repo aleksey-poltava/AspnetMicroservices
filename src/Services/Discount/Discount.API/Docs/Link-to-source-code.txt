@@ -1,1 +1,4 @@
 ﻿https://github.com/mehmetozkaya/AspnetMicroservices/blob/main/src/Services/Discount/Discount.API/Entities/Coupon.cs
+
+docker compose start
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
