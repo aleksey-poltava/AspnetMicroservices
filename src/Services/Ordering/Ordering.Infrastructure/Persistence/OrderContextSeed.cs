@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Emit;
 using Microsoft.Extensions.Logging;
 using Ordering.Domain.Entities;
 
@@ -12,21 +13,30 @@ namespace Ordering.Infrastructure.Persistence
             {
                 orderContext.Orders.AddRange(GetPreconfiguredOrders());
                 await orderContext.SaveChangesAsync();
-                logger.LogInformation("Seed database assotiated with {DbContextName}", typeof(OrderContext).Name);
+                logger.LogInformation("Seed database associated with context {DbContextName}", typeof(OrderContext).Name);
             }
         }
 
         private static IEnumerable<Order> GetPreconfiguredOrders()
         {
-            return new List<Order> {
+            return new List<Order>
+            {
                 new Order() {
                     UserName = "swn",
-                    FirstName = "Memhet",
+                    FirstName = "Mehmet",
                     LastName = "Ozkaya",
-                    EmailAddress = "swn@swn.com",
-                    AddressLine = "City",
+                    EmailAddress = "ezozkme@gmail.com",
+                    AddressLine = "Bahcelievler",
                     Country = "Turkey",
-                    TotalPrice = 350
+                    TotalPrice = 350,
+                    CVV = "CVV",
+                    CardName = "Peter",
+                    CardNumber = "1111 2222 3333 4444",
+                    Expiration = "08/23",
+                    PaymentMethod = 1,
+                    LastModifiedBy = "swn",
+                    State = "USA",
+                    ZipCode = "123456789"
                 }
             };
         }
