@@ -1,0 +1,3 @@
+﻿Create migration with data and startup in different projects
+dotnet ef migrations add InitialCreate --project Ordering.Infrastructure --startup-project Ordering.API
+

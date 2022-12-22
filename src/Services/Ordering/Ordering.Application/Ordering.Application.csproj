@@ -31,6 +31,7 @@
     <None Remove="Features\Orders\Commands\DeleteOrder\" />
     <None Remove="Exceptions\" />
     <None Remove="FluentValidation.DependencyInjectionExtensions" />
+    <None Remove="SendGrid" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Behaviours\" />
@@ -56,5 +57,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
     <PackageReference Include="FluentValidation" Version="11.4.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
+    <PackageReference Include="SendGrid" Version="9.28.1" />
   </ItemGroup>
 </Project>

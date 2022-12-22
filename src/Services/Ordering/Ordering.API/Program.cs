@@ -1,4 +1,11 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Ordering.Application;
+using Ordering.Infrastructure;
+
+var builder = WebApplication.CreateBuilder(args);
+
+var config = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json", optional: false)
+        .Build();
 
 // Add services to the container.
 
@@ -7,7 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddApplicationServices();
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(config);
 
 var app = builder.Build();
 
