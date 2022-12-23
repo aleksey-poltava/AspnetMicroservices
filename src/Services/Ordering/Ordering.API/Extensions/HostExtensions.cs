@@ -17,10 +17,17 @@ namespace Ordering.API.Extensions
                 var services = scope.ServiceProvider;
                 var logger = services.GetRequiredService<ILogger<TContext>>();
                 var context = services.GetService<TContext>(); // get DB context from entity framework
+                
+                var configuration = services.GetRequiredService<IConfiguration>();
 
                 try
                 {
                     logger.LogInformation("Migrating database associated with context {DbContextName}", typeof(TContext).Name);
+
+                    logger.LogCritical("*************************");
+                    logger.LogCritical(configuration.GetConnectionString("OrderingConnectionString"));
+                    logger.LogCritical(context.Database.GetConnectionString());
+                    logger.LogCritical("*************************");
 
                     InvokeSeeder(seeder, context, services);
 

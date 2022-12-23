@@ -1,4 +1,6 @@
-﻿using Ordering.API.Extensions;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Ordering.API.Extensions;
 using Ordering.Application;
 using Ordering.Infrastructure;
 using Ordering.Infrastructure.Persistence;
@@ -7,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var config = new ConfigurationBuilder()
         .AddJsonFile("appsettings.json", optional: false)
+        .AddEnvironmentVariables()
         .Build();
 
 // Add services to the container.
@@ -25,6 +28,7 @@ app.MigrateDatabase<OrderContext>(
     (context, services) =>
     {
         var logger = services.GetService<ILogger<OrderContextSeed>>();
+
         OrderContextSeed
                     .SeedAsync(context, logger)
                     .Wait();
