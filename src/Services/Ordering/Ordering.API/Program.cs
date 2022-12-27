@@ -33,7 +33,7 @@ app.MigrateDatabase<OrderContext>(
                     .SeedAsync(context, logger)
                     .Wait();
     }
-    );
+);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
