@@ -1,5 +1,6 @@
 ﻿using Catalog.API.Data;
 using Catalog.API.Repositories;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,18 @@ builder.Services.AddSwaggerGen(c =>
     {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog.API", Version = "v1" });
     });
+
+//Add JWT Auth
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+        {
+            options.Authority = "https://localhost:7040";
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false
+            };
+        }
+    );
 
 //Dependency injection
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
@@ -29,6 +42,7 @@ if (app.Environment.IsDevelopment())
         c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog.API v1"));
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
