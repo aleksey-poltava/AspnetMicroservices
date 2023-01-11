@@ -1,4 +1,6 @@
-﻿using Shopping.Aggregator.Services;
+﻿using Common.Logging;
+using Shopping.Aggregator.Poicies;
+using Shopping.Aggregator.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,13 +11,35 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Get Logger
+var logger = LoggerFactory.Create(config =>
+{
+    config.AddConsole();
+}).CreateLogger("Program");
+
+logger.LogInformation("Shopping aggregator is starting");
+
+
 //register HttpClients for IHttpClientFactory
+builder.Services.AddTransient<LoggingDelegatingHandler>();
+
 builder.Services.AddHttpClient<ICatalogService, CatalogService>(c =>
-    c.BaseAddress = new Uri(builder.Configuration["ApiSettings:CatalogUrl"]));
+    c.BaseAddress = new Uri(builder.Configuration["ApiSettings:CatalogUrl"]))
+    .AddHttpMessageHandler<LoggingDelegatingHandler>()
+    .AddPolicyHandler(PolicyManager.GetRetryPolicy(logger))
+    .AddPolicyHandler(PolicyManager.GetCircuitBreakerPolicy());
+
 builder.Services.AddHttpClient<IBasketService, BasketService>(c =>
-    c.BaseAddress = new Uri(builder.Configuration["ApiSettings:BasketUrl"]));
+    c.BaseAddress = new Uri(builder.Configuration["ApiSettings:BasketUrl"]))
+    .AddHttpMessageHandler<LoggingDelegatingHandler>()
+    .AddPolicyHandler(PolicyManager.GetRetryPolicy(logger))
+    .AddPolicyHandler(PolicyManager.GetCircuitBreakerPolicy());
+
 builder.Services.AddHttpClient<IOrderService, OrderService>(c =>
-    c.BaseAddress = new Uri(builder.Configuration["ApiSettings:OrderingUrl"]));
+    c.BaseAddress = new Uri(builder.Configuration["ApiSettings:OrderingUrl"]))
+    .AddHttpMessageHandler<LoggingDelegatingHandler>()
+    .AddPolicyHandler(PolicyManager.GetRetryPolicy(logger))
+    .AddPolicyHandler(PolicyManager.GetCircuitBreakerPolicy());
 
 var app = builder.Build();
 
