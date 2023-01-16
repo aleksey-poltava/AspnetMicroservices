@@ -16,6 +16,9 @@
     <PackageReference Include="MassTransit" Version="7.3.1" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="7.3.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="6.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +37,9 @@
     <None Remove="MassTransit" />
     <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
     <None Remove="Mapper\" />
+    <None Remove="AspNetCore.HealthChecks.Redis" />
+    <None Remove="Microsoft.AspNetCore.Diagnostics.HealthChecks" />
+    <None Remove="AspNetCore.HealthChecks.UI.Client" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

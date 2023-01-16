@@ -26,6 +26,7 @@
     <None Remove="Serilog.AspNetCore" />
     <None Remove="Serilog.Enrichers.Environment" />
     <None Remove="Serilog.Sinks.Elasticsearch" />
+    <None Remove="AspNetCore.HealthChecks.Uris" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -36,5 +37,6 @@
     <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
     <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="6.5.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.3" />
   </ItemGroup>
 </Project>

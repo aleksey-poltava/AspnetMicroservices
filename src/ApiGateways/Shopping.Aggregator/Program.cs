@@ -1,10 +1,21 @@
-﻿using Common.Logging;
+﻿using System;
+using Common.Logging;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Shopping.Aggregator.Poicies;
 using Shopping.Aggregator.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//Add health check
+var config = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json", optional: false)
+        .AddEnvironmentVariables()
+        .Build();
+
+builder.Services.AddHealthChecks()
+    .AddUrlGroup(new Uri($"{config.GetSection("ApiSettings:CatalogUrl").Value }/swagger/index.html"), "Catalog.API", HealthStatus.Degraded)
+    .AddUrlGroup(new Uri($"{config.GetSection("ApiSettings: BasketUrl") }/swagger/index.html"), "Basket.API", HealthStatus.Degraded)
+    .AddUrlGroup(new Uri($"{config.GetSection("ApiSettings: OrderingUrl") }/swagger/index.html"), "Ordering.API", HealthStatus.Degraded);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

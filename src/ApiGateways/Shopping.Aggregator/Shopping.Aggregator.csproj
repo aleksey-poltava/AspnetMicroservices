@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.13" />
+    <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
     <None Remove="Extensions\" />
     <None Remove="Microsoft.Extensions.Http.Polly" />
     <None Remove="Poicies\" />
+    <None Remove="AspNetCore.HealthChecks.Uris" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

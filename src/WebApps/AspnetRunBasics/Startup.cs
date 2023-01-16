@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 
 namespace AspnetRunBasics
@@ -20,6 +21,10 @@ namespace AspnetRunBasics
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Add health checks
+            services.AddHealthChecks()
+                .AddUrlGroup(new Uri($"{Configuration["ApiSettings:GatewayAddress"]}/swagger/index.html"), "Catalog.API", HealthStatus.Degraded);
+
             //register HttpClients for IHttpClientFactory
             services.AddHttpClient<ICatalogService, CatalogService>(c =>
                 c.BaseAddress = new Uri(Configuration["ApiSettings:GatewayAddress"]));
